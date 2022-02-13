@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col-lg-6 offset-3">
+    <mat-card class="mt-5 mb-5">
+      <mat-card-header>
+        <mat-card-title>
+          Create An Account
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="example-form mt-4" [formGroup]="form">
+          <mat-form-field class="example-full-width mt-3" appearance="fill">
+            <mat-label>Register Type</mat-label>
+            <mat-select formControlName="registerType">
+              <mat-option [value]="1">Patient</mat-option>
+              <mat-option [value]="0">Hospital</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="d-flex justify-content-between align-items-center mt-2">
+            <mat-form-field class="half-width" appearance="fill">
+              <mat-label>First Name</mat-label>
+              <input type="text" matInput formControlName="firstName" placeholder="First Name">
+            </mat-form-field>
+            <mat-form-field class="half-width" appearance="fill">
+              <mat-label>Last Name</mat-label>
+              <input type="text" matInput formControlName="lastName" placeholder="Last Name">
+            </mat-form-field>
+          </div>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
+                   placeholder="Ex. pat@example.com">
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="form.get('email')?.hasError('email') && !form.get('email')?.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="form.get('email')?.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="example-full-width mt-3">
+            <mat-label>Date Of Birth</mat-label>
+            <input matInput formControlName="dob" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width mt-3" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" placeholder="Password">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width mt-3" appearance="fill">
+            <mat-label>Confirm Password</mat-label>
+            <input type="password" matInput formControlName="confirmPassword" placeholder="Confirm Password">
+          </mat-form-field>
+
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <mat-form-field class="half-width" appearance="fill">
+              <mat-label>Address 1</mat-label>
+              <input type="text" matInput formControlName="address1" placeholder="Address 1">
+            </mat-form-field>
+            <mat-form-field class="half-width" appearance="fill">
+              <mat-label>Address 2</mat-label>
+              <input type="text" matInput formControlName="address2" placeholder="Address 2">
+            </mat-form-field>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <mat-form-field class="half-width" appearance="fill">
+              <mat-label>State</mat-label>
+              <input type="text" matInput formControlName="state" placeholder="State">
+            </mat-form-field>
+            <mat-form-field class="half-width" appearance="fill">
+              <mat-label>Pin Code</mat-label>
+              <input type="number" matInput formControlName="pinCode" placeholder="Pin Code">
+            </mat-form-field>
+          </div>
+
+          <div class="d-flex justify-content-start align-items-center mt-3">
+            <button type="submit" mat-raised-button color="primary" class="">Create An Account</button>
+
+            <button type="button" routerLink="/auth/login" mat-button color="accent" class="ml-3">
+              Want to Login?
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

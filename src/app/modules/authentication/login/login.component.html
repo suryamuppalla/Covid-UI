@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-lg-6 offset-3">
+    <mat-card class="mt-5">
+      <mat-card-header>
+        <mat-card-title>
+          Login
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="example-form mt-4" [formGroup]="form">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
+                   placeholder="Ex. pat@example.com">
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="form.get('email')?.hasError('email') && !form.get('email')?.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="form.get('email')?.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width mt-3" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" placeholder="Password">
+          </mat-form-field>
+
+          <div class="d-flex justify-content-start align-items-center mt-3">
+            <button type="submit" mat-raised-button color="primary" class="">Login</button>
+
+            <button type="button" routerLink="/auth/register" mat-button color="accent" class="ml-2">
+              Want to Create an Account?
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

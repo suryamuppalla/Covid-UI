@@ -1,0 +1,23 @@
+<div class="d-block mt-3 mb-5">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>Welcome Back Mr. <b>John Jocobs</b></h1>
+      <p>
+        <span>Today date is: Monday, 08 2022</span>
+        <span class="ml-3 font-weight-bold">You have an appointment on Monday, 09 2022</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="row mt-4 mb-5">
+    <div class="col-lg-12">
+      <h3 class="font-weight-bold">Your Previous Bookings</h3>
+      <mat-card class="mb-2" *ngFor="let item of [1,2,3,4,5,6,7,8,9]">
+        <mat-card-header>
+          <mat-card-title>Booked a Bed in NRI {{ item }} Hospital</mat-card-title>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </div>
+
+</div>
