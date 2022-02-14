@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavbarModule} from "./modules/navbar/navbar.module";
 import {AuthService} from "./services/auth.service";
 import {AuthGuard} from "./auth.guard";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {AuthGuard} from "./auth.guard";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NavbarModule
+    NavbarModule,
+    HttpClientModule
   ],
   providers: [
     AuthService,
