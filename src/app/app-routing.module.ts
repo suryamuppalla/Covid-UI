@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {AuthGuard} from "./auth.guard";
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
     path: '', redirectTo: 'auth', pathMatch: 'full'
   },
   {
-    path: 'home', loadChildren: () => import('./modules/homepage/homepage.module').then(m => m.HomepageModule)
+    path: 'home', loadChildren: () => import('./modules/homepage/homepage.module').then(m => m.HomepageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'advanced-search',

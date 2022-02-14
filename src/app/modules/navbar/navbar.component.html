@@ -4,12 +4,33 @@
   </button>
   <span>Covid Killer</span>
   <span class="example-spacer"></span>
-  <button mat-raised-button routerLink="/auth/login" class="example-icon favorite-icon"
-          aria-label="Example icon-button with heart icon">
-    Login
-  </button>
-  <button mat-raised-button routerLink="/auth/register" class="example-icon ml-2"
-          aria-label="Example icon-button with share icon">
-    Register
-  </button>
+
+  <div class="d-flex justify-content-start align-items-center" *ngIf="auth.authenticated">
+    <button mat-raised-button routerLink="/auth/login" class="example-icon"
+            aria-label="Example icon-button with heart icon">
+      Home
+    </button>
+
+    <button mat-raised-button routerLink="/auth/login" class="example-icon ml-2"
+            aria-label="Example icon-button with heart icon">
+      Advanced Search
+    </button>
+
+    <button mat-raised-button routerLink="/auth/login" class="example-icon ml-2 mr-2"
+            aria-label="Example icon-button with heart icon">
+      Booking Facilities
+    </button>
+  </div>
+
+
+  <div class="d-flex justify-content-start align-items-center" *ngIf="!auth.authenticated">
+    <button mat-raised-button routerLink="/auth/login" class="example-icon favorite-icon"
+            aria-label="Example icon-button with heart icon">
+      Login
+    </button>
+    <button mat-raised-button routerLink="/auth/register" class="example-icon ml-2"
+            aria-label="Example icon-button with share icon">
+      Register
+    </button>
+  </div>
 </mat-toolbar>
