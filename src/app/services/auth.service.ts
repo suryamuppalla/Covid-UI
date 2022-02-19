@@ -1,17 +1,15 @@
 import {Injectable} from '@angular/core';
-import {UserModel} from "../common/models/user.model";
-import {Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  user$: Subject<UserModel> = new Subject<UserModel>();
-
-  constructor() {
+  constructor(private router: Router) {
   }
-
+  user$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   get authenticated() {
     return localStorage.getItem('AUTH_TOKEN');
   }
@@ -22,5 +20,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('AUTH_TOKEN');
+    this.user$.next(null);
+    this.router.navigateByUrl('/auth/login');
   }
 }

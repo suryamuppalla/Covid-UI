@@ -26,12 +26,16 @@
             <input type="password" matInput formControlName="password" placeholder="Password">
           </mat-form-field>
 
-          <div class="d-flex justify-content-start align-items-center mt-3">
-            <button type="submit" mat-raised-button color="primary" class="">Login</button>
+          <div class="d-flex justify-content-start align-items-center mt-3" *ngIf="!isLoading">
+            <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Login</button>
 
             <button type="button" routerLink="/auth/register" mat-button color="accent" class="ml-2">
               Want to Create an Account?
             </button>
+          </div>
+
+          <div class="d-block mt-3" *ngIf="isLoading">
+            <mat-spinner diameter="20"></mat-spinner>
           </div>
         </form>
       </mat-card-content>

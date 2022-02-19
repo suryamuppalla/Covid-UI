@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-between align-items-center">
+  <h2 class="mb-0">Booking</h2>
+
+  <button mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <form [formGroup]="form" (submit)="submit()">
+    <div class="d-flex justify-content-start align-items-center">
+      <h4>Hospital Name: <b>{{ data.name }}</b></h4>
+    </div>
+
+    <div class="d-flex justify-content-start align-items-center mt-3">
+      <mat-form-field class="half-width" appearance="fill">
+        <mat-label>Facility Type</mat-label>
+        <mat-select formControlName="facilityType">
+          <mat-option value="BED">BED</mat-option>
+          <mat-option value="VENTILATOR">Ventilators</mat-option>
+          <mat-option value="OXYGEN">Oxygen Ward</mat-option>
+          <mat-option value="ISOLATION">Isolation Ward</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="half-width ml-3" appearance="fill">
+        <mat-label>No.of Units</mat-label>
+        <input type="number" formControlName="units" matInput placeholder="No.of Units">
+        <mat-hint>
+          <span *ngIf="form.get('facilityType')?.value === 'BED'">{{ data?.bed?.available }} Beds are available</span>
+          <span *ngIf="form.get('facilityType')?.value === 'VENTILATOR'">{{ data?.ventilator?.available }} Ventilators are available</span>
+          <span *ngIf="form.get('facilityType')?.value === 'OXYGEN'">{{ data?.oxygen?.available }} Oxygen are available</span>
+          <span *ngIf="form.get('facilityType')?.value === 'ISOLATION'">{{ data?.isolation?.available }} Isolation Wards are available</span>
+        </mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="d-flex justify-content-start align-items-center mt-3 mb-1">
+      <button mat-raised-button type="button" (click)="dialogRef.close()">Cancel</button>
+      <button mat-raised-button color="primary" [disabled]="form.invalid" class="ml-3" type="submit">Book Now</button>
+    </div>
+  </form>
+</mat-dialog-content>

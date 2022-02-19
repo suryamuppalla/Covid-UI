@@ -1,4 +1,5 @@
 export interface UserModel {
+  name: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -7,4 +8,6 @@ export interface UserModel {
   address2: string;
   state: string;
   pinCode: number;
+  dob: string;
+  registerType: 0 | 1;
 }

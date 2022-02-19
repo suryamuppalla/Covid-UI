@@ -2,28 +2,29 @@
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>Covid Killer</span>
+  <span style="cursor: pointer;" routerLink="/home">Covid Killer</span>
   <span class="example-spacer"></span>
 
-  <div class="d-flex justify-content-start align-items-center" *ngIf="auth.authenticated">
-    <button mat-raised-button routerLink="/auth/login" class="example-icon"
+  <div class="d-flex justify-content-start align-items-center" *ngIf="auth.user$ | async">
+    <button mat-raised-button routerLink="/home/" class="example-icon"
             aria-label="Example icon-button with heart icon">
       Home
     </button>
 
-    <button mat-raised-button routerLink="/auth/login" class="example-icon ml-2"
+    <button mat-raised-button routerLink="/booking" class="example-icon ml-2"
             aria-label="Example icon-button with heart icon">
-      Advanced Search
+      Booking Facilities
     </button>
 
     <button mat-raised-button routerLink="/auth/login" class="example-icon ml-2 mr-2"
-            aria-label="Example icon-button with heart icon">
-      Booking Facilities
+            aria-label="Example icon-button with heart icon" (click)="auth.logout()">
+      <mat-icon class="mr-1">logout</mat-icon>
+      Logout
     </button>
   </div>
 
 
-  <div class="d-flex justify-content-start align-items-center" *ngIf="!auth.authenticated">
+  <div class="d-flex justify-content-start align-items-center" *ngIf="!(auth.user$ | async)">
     <button mat-raised-button routerLink="/auth/login" class="example-icon favorite-icon"
             aria-label="Example icon-button with heart icon">
       Login

@@ -15,16 +15,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'advanced-search',
-    loadChildren: () => import('./modules/advanced-search/advanced-search.module').then(m => m.AdvancedSearchModule)
-  },
-  {
     path: 'booking', loadChildren: () => import('./modules/booking/booking.module').then(m => m.BookingModule)
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
