@@ -4,7 +4,13 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="isLoading">
+  <div class="col-lg-12">
+    <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+  </div>
+</div>
+
+<div class="row" *ngIf="!isLoading">
   <div class="col-lg-3">
     <mat-form-field class="example-full-width mt-3" appearance="fill">
       <mat-label>Hospital Search</mat-label>
@@ -19,7 +25,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="!isLoading">
   <div class="col-lg-12">
 
     <mat-card class="mb-3" *ngFor="let item of hospitals">

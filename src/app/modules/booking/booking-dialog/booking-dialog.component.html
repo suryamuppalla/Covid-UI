@@ -15,24 +15,31 @@
     <div class="d-flex justify-content-start align-items-center mt-3">
       <mat-form-field class="half-width" appearance="fill">
         <mat-label>Facility Type</mat-label>
-        <mat-select formControlName="facilityType">
-          <mat-option value="BED">BED</mat-option>
+        <mat-select formControlName="bookingType">
+          <mat-option value="BED">Beds</mat-option>
           <mat-option value="VENTILATOR">Ventilators</mat-option>
-          <mat-option value="OXYGEN">Oxygen Ward</mat-option>
-          <mat-option value="ISOLATION">Isolation Ward</mat-option>
+          <mat-option value="OXYGEN">Oxygen Wards</mat-option>
+          <mat-option value="ISOLATION">Isolation Wards</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="half-width ml-3" appearance="fill">
         <mat-label>No.of Units</mat-label>
-        <input type="number" formControlName="units" matInput placeholder="No.of Units">
+        <input type="number" formControlName="quantity" matInput placeholder="No.of Units">
         <mat-hint>
-          <span *ngIf="form.get('facilityType')?.value === 'BED'">{{ data?.bed?.available }} Beds are available</span>
-          <span *ngIf="form.get('facilityType')?.value === 'VENTILATOR'">{{ data?.ventilator?.available }} Ventilators are available</span>
-          <span *ngIf="form.get('facilityType')?.value === 'OXYGEN'">{{ data?.oxygen?.available }} Oxygen are available</span>
-          <span *ngIf="form.get('facilityType')?.value === 'ISOLATION'">{{ data?.isolation?.available }} Isolation Wards are available</span>
+          <span *ngIf="form.get('bookingType')?.value === 'BED'">{{ data?.bed?.available }} Beds are available</span>
+          <span *ngIf="form.get('bookingType')?.value === 'VENTILATOR'">{{ data?.ventilator?.available }} Ventilators are available</span>
+          <span *ngIf="form.get('bookingType')?.value === 'OXYGEN'">{{ data?.oxygen?.available }} Oxygen are available</span>
+          <span *ngIf="form.get('bookingType')?.value === 'ISOLATION'">{{ data?.isolation?.available }} Isolation Wards are available</span>
         </mat-hint>
       </mat-form-field>
     </div>
+    <mat-form-field appearance="fill" class="example-full-width mt-3">
+      <mat-label>Booking Date</mat-label>
+      <input matInput formControlName="bookingDate" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
     <div class="d-flex justify-content-start align-items-center mt-3 mb-1">
       <button mat-raised-button type="button" (click)="dialogRef.close()">Cancel</button>
       <button mat-raised-button color="primary" [disabled]="form.invalid" class="ml-3" type="submit">Book Now</button>

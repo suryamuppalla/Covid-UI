@@ -9,6 +9,7 @@ import {AuthService} from "./services/auth.service";
 import {AuthGuard} from "./auth.guard";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./auth.interceptor";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {AuthInterceptor} from "./auth.interceptor";
     AppRoutingModule,
     BrowserAnimationsModule,
     NavbarModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [
     AuthService,
