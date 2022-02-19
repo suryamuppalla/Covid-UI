@@ -55,7 +55,7 @@ export class BookingDialogComponent implements OnInit, OnDestroy {
       .subscribe((response: any) => {
         console.log(response);
         this.isLoading = false;
-        this.dialogRef.close();
+        this.dialogRef.close(response.data);
         this.snackBar.open(`${response.message}`, '', {
           duration: 3000, verticalPosition: 'top'
         });

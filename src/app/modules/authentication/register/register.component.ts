@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {AuthService} from "../../../services/auth.service";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-register',
@@ -32,7 +33,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
   }
 
@@ -53,6 +55,11 @@ export class RegisterComponent implements OnInit {
           this.httpClient.get(`${environment.apiURL}/auth/getuser`)
             .subscribe((user: any) => {
               this.auth.user$.next(user);
+              this.snackBar.open(
+                `Registration Successful, Logging you in to access features...`,
+                '',
+                { duration: 3000, verticalPosition: 'top' }
+              );
               this.router.navigateByUrl('/home');
             });
         }

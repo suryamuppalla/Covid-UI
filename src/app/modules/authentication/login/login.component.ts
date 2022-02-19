@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {AuthService} from "../../../services/auth.service";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
   }
 
@@ -43,6 +45,11 @@ export class LoginComponent implements OnInit {
             console.log(user);
             this.isLoading = false;
             this.auth.user$.next(user);
+            this.snackBar.open(
+              `Login Successful...`,
+              '',
+              { duration: 3000, verticalPosition: 'top' }
+            );
             this.router.navigateByUrl('/home')
           }, () => {
             this.isLoading = false;
