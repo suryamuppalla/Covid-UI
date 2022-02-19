@@ -10,23 +10,35 @@
   </div>
 </div>
 
-<div class="row" *ngIf="!isLoading">
-  <div class="col-lg-3">
-    <mat-form-field class="example-full-width mt-3" appearance="fill">
-      <mat-label>Hospital Search</mat-label>
-      <input type="text" matInput placeholder="Hospital Search">
-    </mat-form-field>
+<form [formGroup]="filterForm" (submit)="filterRecords()">
+  <div class="row" *ngIf="!isLoading">
+    <div class="col-lg-3">
+      <mat-form-field class="example-full-width mt-3" appearance="fill">
+        <mat-label>Hospital Search</mat-label>
+        <input type="text" matInput placeholder="Hospital Search">
+      </mat-form-field>
+    </div>
+    <div class="col-lg-3">
+      <mat-form-field class="example-full-width mt-3" appearance="fill">
+        <mat-label>PinCode</mat-label>
+        <input type="text" matInput placeholder="PinCode">
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-2">
+      <div class="mt-4">
+        <button mat-raised-button color="primary" type="submit">Search</button>
+      </div>
+    </div>
   </div>
-  <div class="col-lg-3">
-    <mat-form-field class="example-full-width mt-3" appearance="fill">
-      <mat-label>PinCode</mat-label>
-      <input type="text" matInput placeholder="PinCode">
-    </mat-form-field>
-  </div>
-</div>
+</form>
 
 <div class="row" *ngIf="!isLoading">
   <div class="col-lg-12">
+
+    <div class="d-flex justify-content-start align-items-center text-secondary" *ngIf="!hospitals?.length">
+      No Bookings Found
+    </div>
 
     <mat-card class="mb-3" *ngFor="let item of hospitals">
       <mat-card-header>

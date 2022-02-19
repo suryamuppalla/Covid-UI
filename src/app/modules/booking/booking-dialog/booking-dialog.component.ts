@@ -7,7 +7,6 @@ import {takeUntil} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-booking-dialog',
@@ -20,8 +19,9 @@ export class BookingDialogComponent implements OnInit, OnDestroy {
     hospitalId: new FormControl(null, Validators.required),
     bookingType: new FormControl('BED', Validators.required),
     quantity: new FormControl(1, Validators.required),
-    bookingDate: new FormControl(moment().format('YYYY-MM-DD HH:MM:SS'), Validators.required)
+    bookingDate: new FormControl(new Date(), Validators.required)
   });
+  public isLoading = false;
   public unsubscribe$: Subject<any> = new Subject<any>();
 
   constructor(
@@ -49,16 +49,19 @@ export class BookingDialogComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    this.form.value.bookingDate = moment(this.form.value.bookingDate).format('YYYY-MM-DD HH:MM:SS');
+    this.form.value.bookingDate = new Date(this.form.value.bookingDate).toUTCString();
+    this.isLoading = true;
     this.httpClient.post(`${environment.apiURL}/bookings`, this.form.value)
       .subscribe((response: any) => {
         console.log(response);
+        this.isLoading = false;
         this.dialogRef.close();
         this.snackBar.open(`${response.message}`, '', {
           duration: 3000, verticalPosition: 'top'
         });
       }, (error: any) => {
         console.log(error);
+        this.isLoading = false;
       });
   }
 

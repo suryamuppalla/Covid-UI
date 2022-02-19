@@ -4,6 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {BookingDialogComponent} from "./booking-dialog/booking-dialog.component";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-booking',
@@ -13,6 +14,10 @@ import {environment} from "../../../environments/environment";
 export class BookingComponent implements OnInit {
   public hospitals: any[] = [];
   public isLoading = false;
+  public filterForm = new FormGroup({
+    hospital: new FormControl(null),
+    pinCode: new FormControl(null)
+  });
 
   constructor(
     public auth: AuthService,
@@ -46,4 +51,6 @@ export class BookingComponent implements OnInit {
       width: '600px'
     });
   }
+
+  filterRecords() {}
 }
