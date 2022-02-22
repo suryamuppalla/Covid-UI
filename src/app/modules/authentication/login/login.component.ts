@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     this.httpClient.post(`${environment.apiURL}/auth/login`, this.form.value)
       .subscribe((response: any) => {
         this.auth.setToken(response?.token);
-        this.httpClient.get(`${environment.apiURL}/auth/getuser`)
+        this.httpClient.get(`${environment.apiURL}/auth/current-user`)
           .subscribe((user: any) => {
             console.log(user);
             this.isLoading = false;

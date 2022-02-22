@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --base-href /covid-build/ --watch",
+    "build-prod": "ng build --base-href /~2019513/covid-ui/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
