@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiURL: '/covid-api/public/api'
+  apiURL: 'https://mi-linux.wlv.ac.uk/~2019513/covid-api/public/api'
 };
