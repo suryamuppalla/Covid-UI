@@ -11,7 +11,7 @@ import {environment} from "../environments/environment";
 export class AppComponent {
   constructor(private auth: AuthService, private httpClient: HttpClient) {
     if (auth.authenticated) {
-      this.httpClient.get(`${environment.apiURL}/auth/getuser`)
+      this.httpClient.get(`${environment.apiURL}/auth/current-user`)
         .subscribe((user: any) => {
           this.auth.user$.next(user);
         })

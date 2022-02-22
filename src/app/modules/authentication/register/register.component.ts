@@ -47,12 +47,12 @@ export class RegisterComponent implements OnInit {
     formData.dob = new Date(formData.dob).toUTCString();
 
     this.isLoading = true;
-    this.httpClient.post(`${environment.apiURL}/auth/signup`, formData)
+    this.httpClient.post(`${environment.apiURL}/auth/register`, formData)
       .subscribe((response: any) => {
         this.isLoading = false;
         if (response && response.token) {
           this.auth.setToken(response.token);
-          this.httpClient.get(`${environment.apiURL}/auth/getuser`)
+          this.httpClient.get(`${environment.apiURL}/auth/current-user`)
             .subscribe((user: any) => {
               this.auth.user$.next(user);
               this.snackBar.open(
