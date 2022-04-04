@@ -2,7 +2,7 @@ import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/auth.service";
-import {Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
@@ -18,7 +18,7 @@ export class BookingDialogComponent implements OnInit, OnDestroy {
     userId: new FormControl(null, Validators.required),
     hospitalId: new FormControl(null, Validators.required),
     bookingType: new FormControl('BED', Validators.required),
-    quantity: new FormControl(1, Validators.required),
+    quantity: new FormControl(1, [Validators.required, Validators.min(1)]),
     bookingDate: new FormControl(new Date(), Validators.required)
   });
   public isLoading = false;
@@ -34,6 +34,7 @@ export class BookingDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log(this.data);
     this.auth.user$
       .pipe(
         takeUntil(this.unsubscribe$)
@@ -44,6 +45,17 @@ export class BookingDialogComponent implements OnInit, OnDestroy {
             userId: value?.id,
             hospitalId: this.data.id
           });
+
+          // Update Booking
+          if (this.data.bookingDate && this.data.bookingType) {
+            this.form.patchValue({
+              bookingType: this.data.bookingType.toUpperCase(),
+              hospitalId: this.data.hospitalId,
+              quantity: this.data.quantity,
+              bookingDate: new Date(this.data.bookingDate)
+            });
+            this.form.get('bookingType')?.disable();
+          }
         }
       });
   }
@@ -51,8 +63,11 @@ export class BookingDialogComponent implements OnInit, OnDestroy {
   submit() {
     this.form.value.bookingDate = new Date(this.form.value.bookingDate).toUTCString();
     this.isLoading = true;
-    this.httpClient.post(`${environment.apiURL}/bookings`, this.form.value)
-      .subscribe((response: any) => {
+    let bookingAPI: Observable<any>;
+    bookingAPI = this.data.bookingDate ?
+      this.httpClient.patch(`${environment.apiURL}/bookings/${this.data.id}`, this.form.getRawValue()):
+      this.httpClient.post(`${environment.apiURL}/bookings`, this.form.getRawValue());
+      bookingAPI.subscribe((response: any) => {
         console.log(response);
         this.isLoading = false;
         this.dialogRef.close(response.data);
@@ -62,6 +77,9 @@ export class BookingDialogComponent implements OnInit, OnDestroy {
       }, (error: any) => {
         console.log(error);
         this.isLoading = false;
+        this.snackBar.open(error?.error?.error || error?.error, '', {
+          duration: 3000, verticalPosition: 'top'
+        });
       });
   }
 
