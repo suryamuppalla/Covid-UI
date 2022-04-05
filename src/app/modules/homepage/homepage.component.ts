@@ -14,7 +14,7 @@ import {BookingDialogComponent} from "../booking/booking-dialog/booking-dialog.c
 export class HomepageComponent implements OnInit {
   public bookings: any[] = [];
   public futureAppointment: any;
-  public cancelBooking = false;
+  public cancelBooking: {[key: number]: boolean} = {};
 
   constructor(
     public auth: AuthService,
