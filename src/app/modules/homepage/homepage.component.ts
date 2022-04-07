@@ -46,11 +46,11 @@ export class HomepageComponent implements OnInit {
       });
   }
 
-  deleteBooking(item: any, index: number) {
-    this.httpClient.delete(`${environment.apiURL}/bookings/${item.id}`)
+  deleteBooking(item: any) {
+    this.httpClient.post(`${environment.apiURL}/bookings/delete/${item.id}`, {})
       .subscribe((response: any) => {
         if (response && response.data) {
-          this.bookings.splice(index);
+          this.getBookings();
           this.snackBar.open(`Successfully Cancelled Your Booking...`, '', {
             duration: 3000, verticalPosition: 'top'
           });

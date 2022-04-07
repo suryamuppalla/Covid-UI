@@ -65,7 +65,7 @@ export class BookingDialogComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     let bookingAPI: Observable<any>;
     bookingAPI = this.data.bookingDate ?
-      this.httpClient.patch(`${environment.apiURL}/bookings/${this.data.id}`, this.form.getRawValue()):
+      this.httpClient.post(`${environment.apiURL}/bookings/update/${this.data.id}`, this.form.getRawValue()):
       this.httpClient.post(`${environment.apiURL}/bookings`, this.form.getRawValue());
       bookingAPI.subscribe((response: any) => {
         console.log(response);
