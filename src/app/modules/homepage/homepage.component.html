@@ -48,7 +48,7 @@
           <div class="d-flex justify-content-start align-items-center mt-2">
             <button mat-raised-button color="primary" class="mr-3" (click)="updateBooking(item)">Update Booking</button>
             <button mat-raised-button (click)="cancelBooking[i] = true;" *ngIf="!cancelBooking[i]">Cancel Booking</button>
-            <button mat-raised-button color="warn" (click)="deleteBooking(item, i)" *ngIf="cancelBooking[i]">Are you sure?</button>
+            <button mat-raised-button color="warn" (click)="deleteBooking(item)" *ngIf="cancelBooking[i]">Are you sure?</button>
             <button mat-raised-button class="ml-3" (click)="cancelBooking[i] = false" *ngIf="cancelBooking[i]">Cancel</button>
           </div>
         </mat-card-content>
